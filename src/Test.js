@@ -21,7 +21,6 @@ class Test extends React.Component {
         return child;
       }
     });
-    console.log(children);
     return (
       <div style={{ display: "inline-block", width: "30%" }}>{children}</div>
     );

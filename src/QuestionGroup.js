@@ -10,6 +10,15 @@ class QuestionGroup extends React.Component {
     activeValue: this.props.defaultValue
   };
 
+  componentDidMount() {
+    const { _onChange } = this.props;
+    if (!_onChange) {
+      console.error(
+        "No onChange handler provided to <QuestionGroup />. Check that your <QuestionGroup /> is wrapped in a <Test /> "
+      );
+    }
+  }
+
   handleSelect = value => {
     this.setState({ activeValue: value }, () => {
       this.props._onChange &&
