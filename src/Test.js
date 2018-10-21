@@ -6,7 +6,7 @@ class Test extends React.Component {
 
   cacheAnswers = (activeValue, questionNumber) => {
     this.answers[questionNumber] = activeValue;
-    this.props.getAnswers && this.props.getAnswers(this.answers);
+    this.props.onOptionSelect && this.props.onOptionSelect(this.answers);
   };
   render() {
     const { style } = this.props;

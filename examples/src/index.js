@@ -8,7 +8,7 @@ import { Test } from "../../src";
 
 class App extends React.Component {
   state = {
-    answers: {},
+    selectedOptions: {},
     questions: [],
     loading: true
   };
@@ -37,13 +37,15 @@ class App extends React.Component {
     });
   };
   render() {
-    const { loading, questions, answers } = this.state;
+    const { loading, questions, selectedOptions } = this.state;
     return loading ? (
       <div> Getting questions... </div>
     ) : (
       <Fragment>
-        <div>Answers: {JSON.stringify(answers, null, 4)}</div>
-        <Test getAnswers={answers => this.setState({ answers })}>
+        <div>Selected Options: {JSON.stringify(selectedOptions, null, 4)}</div>
+        <Test
+          onOptionSelect={selectedOptions => this.setState({ selectedOptions })}
+        >
           {this.renderQuestions(questions)}
         </Test>
       </Fragment>
