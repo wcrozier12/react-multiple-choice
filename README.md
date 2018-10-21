@@ -61,7 +61,9 @@ ex.
 
 # Example Usage
 ```
-import { Test, QuestionGroup, Question, Option } from react-multiple choice;
+import React from 'react';
+import { render } from 'react-dom';
+import { Test, QuestionGroup, Question, Option } from 'react-multiple choice';
 
 class App extends React.Component {
   state = {
