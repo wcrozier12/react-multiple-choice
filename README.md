@@ -18,6 +18,7 @@ The test component is a wrapper for your form, all other components must be wrap
 
 `onOptionSelect` - Function - A function that returns the an object containing the question number as the keys and the selected option's value as the value.
 NOTE: If the user has not selected an option for a question, that question number will not appear in the return value of `onOptionSelect`
+
 `Style` - Object
 
 ex. `<Test onOptionSelect={selectedOptions => console.log(selectedOptions)} />`
@@ -29,6 +30,7 @@ The QuestionGroup component is a wrapper for each individual question. It wraps 
 
 #### Props
 `questionNumber` - Integer - This will be the key provided by the `Test` component's `onOptionSelect` return value.
+
 `Style` - Object
 
 ## Question
