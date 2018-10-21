@@ -36,6 +36,7 @@ class App extends React.Component {
       );
     });
   };
+
   render() {
     const { loading, questions, selectedOptions } = this.state;
     return loading ? (
