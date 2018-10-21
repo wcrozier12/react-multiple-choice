@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Radio from "@material-ui/core/Radio";
 
 class RadioIcon extends React.Component {
   static propTypes = {
@@ -9,50 +10,20 @@ class RadioIcon extends React.Component {
   render() {
     const { _onSelect, value, style, isSelected, selectedStyle } = this.props;
     const defaultStyle = {
-      borderColor: "#ccc",
-      borderWidth: 0.5,
-      borderRadius: "10px",
-      borderStyle: this.props.isSelected ? "inset" : "outset",
-      height: "66%",
-      width: "66%",
-      display: "inline-block",
-      cursor: "pointer",
-      background: isSelected ? "rgba(0, 0, 0, 0.05)" : "",
-      visibility: isSelected ? "hidden" : "",
-      position: isSelected ? "absolute" : ""
+      color: "#0C7C00"
     };
     const appliedStyle =
       style && style.icon
-        ? { ...style.icon, ...defaultStyle }
+        ? { ...defaultStyle, ...style.icon }
         : { ...defaultStyle };
     return (
-      <div style={{ position: "relative", width: "24px", height: "24px" }}>
-        <input
-          type="radio"
-          value={value}
-          checked={isSelected}
-          onChange={() => _onSelect(value)}
-          style={
-            isSelected && selectedStyle && selectedStyle.icon ? (
-              { ...appliedStyle, ...selectedStyle.icon }
-            ) : (
-              appliedStyle
-            )
-          }
-        />
-        {isSelected && (
-          <div
-            style={{
-              ...defaultStyle,
-              width: "100%",
-              height: "100%",
-              visibility: ""
-            }}
-          >
-            ✓
-          </div>
-        )}
-      </div>
+      <Radio
+        type="radio"
+        value={value}
+        style={appliedStyle}
+        checked={isSelected}
+        onChange={() => _onSelect(value)}
+      />
     );
   }
 }
@@ -82,7 +53,7 @@ class Option extends React.Component {
     };
     const appliedStyle =
       style && style.option
-        ? { ...style.option, ...defaultStyle }
+        ? { ...defaultStyle, ...style.option }
         : { ...defaultStyle };
 
     return (

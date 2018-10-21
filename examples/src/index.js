@@ -1,67 +1,52 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { render } from "react-dom";
 import { QuestionGroup } from "../../src";
 import { Question } from "../../src";
 import { Option } from "../../src";
 import { MultipleQuestions } from "../../src";
 import { Test } from "../../src";
-const questions = [
-  {
-    question: "What is your name?",
-    options: ["Cody", "Idk", "Joe", "lobe"]
-  },
-  {
-    question: "What is his name?",
-    options: ["Cody", "Idk", "Joe", "lobe"]
-  }
-];
-
-class MultipleChoice extends React.Component {
-  state = {
-    answers: {}
-  };
-
-  getAnswers = answers => {
-    this.setState({ answers });
-  };
-  render() {
-    return (
-      <MultipleQuestions
-        questions={questions}
-        getAnswers={answers => this.getAnswers(answers)}
-      />
-    );
-  }
-}
 
 class App extends React.Component {
   state = {
-    answers: {}
+    answers: {},
+    questions: [],
+    loading: true
+  };
+
+  componentDidMount() {
+    fetch("https://opentdb.com/api.php?amount=5")
+      .then(r => r.json())
+      .then(r => this.setState({ questions: r.results, loading: false }));
+  }
+
+  renderQuestions = questions => {
+    return questions.map((q, i) => {
+      const options = [...q.incorrect_answers, q.correct_answer];
+      return (
+        <QuestionGroup key={i} questionNumber={i}>
+          <Question>{q.question}</Question>
+          {options.map((op, i) => {
+            return (
+              <Option value={i.toString()} key={op}>
+                {op}
+              </Option>
+            );
+          })}
+        </QuestionGroup>
+      );
+    });
   };
   render() {
-    return (
-      <div>
-        <div> {JSON.stringify(this.state.answers)}</div>
+    const { loading, questions, answers } = this.state;
+    return loading ? (
+      <div> Getting questions... </div>
+    ) : (
+      <Fragment>
+        <div>Answers: {JSON.stringify(answers, null, 4)}</div>
         <Test getAnswers={answers => this.setState({ answers })}>
-          <QuestionGroup questionNumber={0}>
-            <Question>What do you like?</Question>
-            <Option value="0">
-              Mac n cheese This is a super long question that I dont know if a
-              question this long will ever get asked but Im going to ask anyway?
-            </Option>
-            <Option value="1">Mac n cheese</Option>
-            <Option value="2">Mac n cheese</Option>
-            <Option value="3">Mac n cheese</Option>
-          </QuestionGroup>
-          <QuestionGroup questionNumber={1}>
-            <Question>What dont you like?</Question>
-            <Option value="0">boooo</Option>
-            <Option value="1">ahhh</Option>
-            <Option value="2">Mase</Option>
-            <Option value="3">Maese</Option>
-          </QuestionGroup>
+          {this.renderQuestions(questions)}
         </Test>
-      </div>
+      </Fragment>
     );
   }
 }

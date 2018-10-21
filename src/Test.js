@@ -1,6 +1,4 @@
 import React from "react";
-//@todo Make this component receive the answers from the children components and pass those back to the user. Similar to how multiplechoice.js does
-//Will need to loop through children and provide a function and then hold form state to pass back to user.
 import { QuestionGroup } from "./index";
 
 class Test extends React.Component {
@@ -11,6 +9,12 @@ class Test extends React.Component {
     this.props.getAnswers && this.props.getAnswers(this.answers);
   };
   render() {
+    const { style } = this.props;
+    const defaultStyle = { display: "inline-block", width: "30%" };
+    const appliedStyle = style
+      ? { ...defaultStyle, ...style }
+      : { ...defaultStyle };
+
     const children = React.Children.map(this.props.children, child => {
       if (child.type === QuestionGroup) {
         return React.cloneElement(child, {
@@ -21,9 +25,7 @@ class Test extends React.Component {
         return child;
       }
     });
-    return (
-      <div style={{ display: "inline-block", width: "30%" }}>{children}</div>
-    );
+    return <div style={appliedStyle}>{children}</div>;
   }
 }
 

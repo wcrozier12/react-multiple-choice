@@ -6,8 +6,8 @@ class Question extends React.Component {
     style: PropTypes.object
   };
   render() {
-    const { style } = this.props;
-    return <div style={style}>{this.props.children}</div>;
+    const { style, children } = this.props;
+    return <div style={style}>{children}</div>;
   }
 }
 
