@@ -1,6 +1,6 @@
 {
   "name": "react-multiple-choice",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "webpack-dev-server": "^3.1.9"
   },
   "dependencies": {
+    "@material-ui/core": "^3.2.2",
     "prop-types": "^15.6.2"
   }
 }
