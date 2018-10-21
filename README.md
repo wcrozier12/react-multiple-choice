@@ -1,6 +1,7 @@
 # react-multiple-choice
 React-multiple-choice is a super customizable library of components to easily add a multiple choice form to your application. Access to the individual components of the form gives you full control of what is rendered in your application.
 
+NOTE: If you were using version 1.x.x please upgrade to version 2.0.0 that supports the full API.
 # Installation and usage
 The easiest way to use react-multiple-choice is to install it from npm and build it into your app with webpack.
 `npm install react-multiple-choice`
